@@ -6,11 +6,12 @@ import cv2
 from PIL import Image
 
 
-def facedetect(face_cascade, cap, image):
+def facedetect(face_cascade, cap):
     global isFirst
     isFirst=True
     cnt = 0
     while(True):
+        image = cv2.imread('yosano.png', cv2.IMREAD_UNCHANGED)
         ret, frame = cap.read()
 
         if not ret:
@@ -87,12 +88,11 @@ if __name__ == '__main__':
     # playSound()
     cap = cv2.VideoCapture(0)
     face_cascade = cv2.CascadeClassifier('haarcascades/haarcascade_frontalface_alt.xml')
-    image = cv2.imread('yosano.png', cv2.IMREAD_UNCHANGED)
     ret, frame = cap.read()
     try:
         while True:
             k=cv2.waitKey(1)
-            facedetect(face_cascade,cap,image)
+            facedetect(face_cascade,cap)
             if k == 27:
                 break      
     except KeyboardInterrupt:
